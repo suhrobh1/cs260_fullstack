@@ -1,47 +1,56 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const EditExercisePage = () => {
+export const EditExercisePage = ({exerciseToEdit}) => {
 
-    const [exercise, setExercise] = useState({
-        name: "",
-        reps: "",
-        weight: "",
-        unit: "",
-        date: "",
+    const [editedExercise, setEditedExercise] = useState({
+        name: exerciseToEdit.name,
+        reps: exerciseToEdit.reps,
+        weight: exerciseToEdit.weight,
+        unit: exerciseToEdit.unit,
+        date: exerciseToEdit.date,
       });
 
     // exercise inputs are being captured and stored
     const handleChange = (e) => {
-        setExercise({...exercise, [e.target.name]: e.target.value});
+        setEditedExercise({...editedExercise, [e.target.name]: e.target.value});
       };
     
-    const loadExercises = async () => {
-        const response = await fetch('/exercises');
-        const data = await response.json();
-        setExercise(data)
-    }
+  
 
+    const addExercise = async () => {
+        // const newExercise = { title, year, language };
+        const response = await fetch(`/exercise/${exerciseToEdit._id}`, {
+            method: 'PUT',
+            body: JSON.stringify(editedExercise),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if(response.status === 201){
+            alert("Successfully added the exercise!");
+            navigate('/')
+        } else {
+            alert(`Failed to add exercise, status code = ${response.status}`);
+        }
+    };
 
 
     return (
         <div>
-        <h1>Add Exercise</h1>
+        <h1>Edit Exercise</h1>
         <input
             type="text"
-            placeholder="Enter name here"
             name = "name"
             value={exercise.name}
             onChange={(e) => handleChange(e)}/>
         <input
             type="number"
             value={exercise.reps}
-            placeholder="Enter reps here"
             name='reps'
             onChange={(e) => handleChange(e)} />
         <input
             type="number"
-            placeholder="Enter weight here"
             name='weight'
             value={exercise.weight}
             onChange={(e) => handleChange(e)}/>
@@ -58,7 +67,6 @@ export const EditExercisePage = () => {
         </select>
          <input
             type="date"
-            placeholder="Enter date here"
             name='date'
             value={exercise.date}
             onChange={(e) => handleChange(e)} />

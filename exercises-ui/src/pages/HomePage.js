@@ -5,7 +5,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 
-function HomePage() {
+function HomePage({ setExerciseToEdit}) {
+
+    const navigate = useNavigate()
     const [exercises, setExercises] = useState([]);
 
     const loadExercises = async () => {
@@ -17,7 +19,12 @@ function HomePage() {
     useEffect(() => {
         loadExercises();
     }, []);
+    
 
+    const onEdit = exercise =>{
+        setExerciseToEdit(exercise)
+        navigate('/edit_exercise')
+    }
 
     
     const onDelete = async _id => {
@@ -37,7 +44,7 @@ function HomePage() {
             <div className='main'>
             <Navigation />
             <h2>List of Exercises</h2>
-            <ExerciseList exercises={exercises} onDelete = {onDelete}> </ExerciseList>
+            <ExerciseList exercises={exercises} onDelete = {onDelete} onEdit={onEdit}> </ExerciseList>
             </div>
         </>
     );

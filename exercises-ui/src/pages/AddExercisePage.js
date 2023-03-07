@@ -34,7 +34,6 @@ export const AddExercisePage = () => {
         } else {
             alert(`Failed to add exercise, status code = ${response.status}`);
         }
-        
     };
 
 
