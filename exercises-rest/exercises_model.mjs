@@ -27,11 +27,15 @@ const exerciseSchema = mongoose.Schema({
     },
     unit:{
         type: String, 
-        required: [true, "The unit of measurement of the weight. Only values allowed are kgs and lbs required!"]
+        required: [true, "The unit of measurement of the weight. Only values allowed are kgs and lbs required!"],
+        enum: [
+            "lbs",
+            "kg"]
     },
     date:{
         type: String, 
         required: [true, "The date the exercise was performed. Specified as MM-DD-YY, e.g., 07-30-21 required!"]
+        
     },
 });
 

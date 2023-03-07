@@ -1,12 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import items from './data/items';
+// import items from './data/items';
 
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import OrderPage from './pages/OrderPage';
-import RegistrationPage from './pages/RegistrationPage';
-import Navigation from './components/Navigation';
+import AddExercisePage from './pages/AddExercisePage';
+import EditExercisePage from './pages/EditExercisePage';
 
 
 function App() {
@@ -17,8 +15,8 @@ function App() {
       <Router>
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
-            <Route path="/order" element={ <OrderPage items = {items}/>}></Route>
-            <Route path="/register" element={ <RegistrationPage />}></Route>
+            <Route path="/add_exercise" element={ <AddExercisePage />}></Route>
+            <Route path="/edit_exercise" element={ <EditExercisePage />}></Route>
           </Routes>
         </Router>
       </header>

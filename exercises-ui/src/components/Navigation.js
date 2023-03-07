@@ -8,10 +8,7 @@ function Navigation() {
                 <Link to="/" className='nav_bar_text'>Home</Link>
             </div>
             <div>
-                <Link to="/order" className='nav_bar_text'>Order</Link>
-            </div>
-            <div>
-            <Link to="/register" className='nav_bar_text'>Registration</Link>
+                <Link to="/add_exercise" className='nav_bar_text'>Add Exercise</Link>
             </div>
         </nav>
     );
